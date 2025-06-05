@@ -5,21 +5,25 @@ package com.example.Individual.Assignment3.Animal;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.stereotype.Controller;
+//import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
+//import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.ui.Model;
+
 
 /**
  * AnimalController is a REST controller that handles HTTP requests related to
  * animal.
  * It provides endpoints for CRUD operations on animal data.
  */
-@RestController
+//@RestController
+@Controller
 public class AnimalController {
 
     @Autowired
@@ -32,8 +36,10 @@ public class AnimalController {
    */
 
     @GetMapping("/animals")
-    public Object getAllAnimals(){
-        return animalService.getAllAnimals();
+    public Object getAllAnimals(Model model){
+      model.addAttribute("animalList", animalService.getAllAnimals());
+      model.addAttribute("title", "All Animals");
+      return "animal-list";
     }
 
       /**
@@ -44,8 +50,11 @@ public class AnimalController {
    */
 
    @GetMapping("/animals/{id}")
-   public Animal getAnimalById(@PathVariable long id){
-    return animalService.getAnimalById(id);
+   public Object getAnimalById(@PathVariable long id, Model model){
+    //return animalService.getAnimalById(id);
+    model.addAttribute("animal", animalService.getAnimalById(id));
+    model.addAttribute("title", "Animal #: " + id);
+    return "animal-details";
    }
 
     /**
@@ -56,11 +65,13 @@ public class AnimalController {
    */
 
    @GetMapping("/animals/name")
-   public Object getAnimalsByName(@RequestParam String key){
+   public Object getAnimalsByName(@RequestParam String key, Model model){
         if(key != null){
-            return animalService.getAnimalsByName(key);
+          model.addAttribute("AnimalList", animalService.getAnimalsByName(key));
+          model.addAttribute("title", "Animals By Name: " + key);
+            return "animal-list";
         }else{
-            return animalService.getAllAnimals();
+            return "redirect:/animals/";
         }
    }
 
@@ -73,8 +84,11 @@ public class AnimalController {
    */
 
    @GetMapping("/animals/breed/{breed}")
-  public Object getAnimalsByBreed(@PathVariable String breed) {
-    return animalService.getAnimalsByBreed(breed);
+  public Object getAnimalsByBreed(@PathVariable String breed, Model model) {
+    //return animalService.getAnimalsByBreed(breed);
+    model.addAttribute("animalsList", animalService.getAnimalsByBreed(breed));
+    model.addAttribute("title", "Animals By Breed: " + breed);
+    return "animal-list";
   }
 
 
@@ -83,7 +97,20 @@ public class AnimalController {
     return new ResponseEntity<>(animalService.getAgeOverTwo(age), HttpStatus.OK);
   }
 
-  
+  /**
+   * Endpoint to show the create form for a new animal
+   *
+   * @param model The model to add attributes to
+   * @return The view name for the create form
+   */
+  @GetMapping("/animals/createForm")
+  public Object showCreateForm(Model model){
+    Animal animal = new Animal();
+    model.addAttribute("animal", animal);
+    model.addAttribute("title", "Create New Animal");
+    return "animal-create";
+  }
+
   /**
    * Endpoint to add a new animal
    *
@@ -91,9 +118,26 @@ public class AnimalController {
    * @return List of all animals
    */
     @PostMapping("/animals")
-    public Object addAnimal(@RequestBody Animal animal){
-        return animalService.addAnimal(animal);
-    }
+    public Object addAnimal(Animal animal, @RequestParam MultipartFile picture){
+        //return animalService.addAnimal(animal);
+        Animal newAnimal = animalService.addAnimal(animal, picture);
+        return "redirect:/animals/" + newAnimal.getDogId();   
+       }
+
+      /**
+   * Endpoint to show the update form for a animal
+   *
+   * @param id    The ID of the animal to update
+   * @param model The model to add attributes to
+   * @return The view name for the update form
+   */
+  @GetMapping("/animals/updateForm/{id}")
+  public Object showUpdateForm(@PathVariable Long id, Model model){
+    Animal animal = animalService.getAnimalById(id);
+    model.addAttribute("animal", animal);
+    model.addAttribute("title", "Update Animal: " + id);
+    return "animal-update";
+  }
 
       /**
    * Endpoint to update an animal
@@ -103,10 +147,11 @@ public class AnimalController {
    * @return The updated animal
    */
 
-   @PutMapping("/animals/{id}")
-   public Animal updateAnimal(@PathVariable Long id, @RequestBody Animal animal){
-    animalService.updateAnimal(id, animal);
-    return animalService.getAnimalById(id);
+   //@PutMapping("/animals/{id}")
+   @PostMapping("/animals/update/{id}")
+   public Object updateAnimal(@PathVariable Long id, Animal animal, @RequestParam MultipartFile picture){
+    animalService.updateAnimal(id, animal, picture);
+    return "redirect:/animals/" + id;
    }
 
    /**
@@ -116,10 +161,12 @@ public class AnimalController {
    * @return List of all animals
    */
 
-   @DeleteMapping("/animals/{id}")
+   //@DeleteMapping("/animals/{id}")
+   @GetMapping("/animals/delete/{id}")
    public Object deleteAnimal(@PathVariable Long id){
     animalService.deleteAnimal(id);
-    return animalService.getAllAnimals();
+    animalService.getAllAnimals();
+    return "redirect:/animals/";
    }
 
 

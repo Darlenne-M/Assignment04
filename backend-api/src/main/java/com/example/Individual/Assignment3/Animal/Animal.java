@@ -16,26 +16,28 @@ public class Animal {
     private String description;
     private String breed;
     private double age;
+    private String animalPicturePath;
 
 
     public Animal() {
 
     }
 
-        public Animal(Long dogId, String name, String description, String breed, double age) {
+        public Animal(Long dogId, String name, String description, String breed, double age, String animalPicturePath) {
         this.dogId = dogId;
         this.name = name;
         this.description = description;
         this.breed = breed;
         this.age = age;
+        this.animalPicturePath = animalPicturePath;
     }
 
-    public Animal(String name, String description, String breed, double age) {
-        this.dogId = dogId;
+    public Animal(String name, String description, String breed, double age, String animalPicturePath) {
         this.name = name;
         this.description = description;
         this.breed = breed;
         this.age = age;
+        this.animalPicturePath = animalPicturePath;
     }
 
     public Long getDogId(){
@@ -78,4 +80,11 @@ public class Animal {
         this.age = age;
     }
 
+    public String getAnimalPicturePath(){
+        return animalPicturePath;
+    }
+
+    public void setAnimalPicturePath(String animalPicturePath){
+        this.animalPicturePath = animalPicturePath;
+    }
 }
