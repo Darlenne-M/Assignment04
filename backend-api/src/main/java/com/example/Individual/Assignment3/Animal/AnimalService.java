@@ -20,7 +20,8 @@ public class AnimalService {
     
     @Autowired
     private AnimalRepository animalRepository;
-    private static final String UPLOAD_DIR = "src/main/resources/static/animalPictires/";
+
+    private static final String UPLOAD_DIR = "src/main/resources/static/animalPictures/";
   /**
    * Method to get all animals
    *
@@ -94,7 +95,8 @@ public class AnimalService {
           InputStream inputStream = animalPicture.getInputStream();
 
           Files.createDirectories(Paths.get(UPLOAD_DIR));
-          Files.copy(inputStream, filePath, StandardCopyOption.REPLACE_EXISTING);
+          Files.copy(inputStream, filePath, 
+            StandardCopyOption.REPLACE_EXISTING);
           newAnimal.setAnimalPicturePath(fileName);
         }
       }catch(Exception e){
@@ -122,7 +124,8 @@ public class AnimalService {
           InputStream inputStream = animalPicture.getInputStream();
           Files.deleteIfExists(filePath);
           Files.copy(inputStream, filePath);
-          Files.copy(inputStream, filePath, StandardCopyOption.REPLACE_EXISTING);
+          Files.copy(inputStream, filePath,
+            StandardCopyOption.REPLACE_EXISTING);
           animal.setAnimalPicturePath(fileName);
         }
       }catch (Exception e) {

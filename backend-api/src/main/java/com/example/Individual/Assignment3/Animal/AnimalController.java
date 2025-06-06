@@ -67,7 +67,7 @@ public class AnimalController {
    @GetMapping("/animals/name")
    public Object getAnimalsByName(@RequestParam String key, Model model){
         if(key != null){
-          model.addAttribute("AnimalList", animalService.getAnimalsByName(key));
+          model.addAttribute("animalList", animalService.getAnimalsByName(key));
           model.addAttribute("title", "Animals By Name: " + key);
             return "animal-list";
         }else{
@@ -86,7 +86,7 @@ public class AnimalController {
    @GetMapping("/animals/breed/{breed}")
   public Object getAnimalsByBreed(@PathVariable String breed, Model model) {
     //return animalService.getAnimalsByBreed(breed);
-    model.addAttribute("animalsList", animalService.getAnimalsByBreed(breed));
+    model.addAttribute("animalList", animalService.getAnimalsByBreed(breed));
     model.addAttribute("title", "Animals By Breed: " + breed);
     return "animal-list";
   }
@@ -165,7 +165,6 @@ public class AnimalController {
    @GetMapping("/animals/delete/{id}")
    public Object deleteAnimal(@PathVariable Long id){
     animalService.deleteAnimal(id);
-    animalService.getAllAnimals();
     return "redirect:/animals/";
    }
 

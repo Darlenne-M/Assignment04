@@ -18,12 +18,11 @@ public class Animal {
     private double age;
     private String animalPicturePath;
 
-
     public Animal() {
 
     }
 
-        public Animal(Long dogId, String name, String description, String breed, double age, String animalPicturePath) {
+    public Animal(Long dogId, String name, String description, String breed, double age, String animalPicturePath) {
         this.dogId = dogId;
         this.name = name;
         this.description = description;
@@ -40,51 +39,51 @@ public class Animal {
         this.animalPicturePath = animalPicturePath;
     }
 
-    public Long getDogId(){
+    public Long getDogId() {
         return dogId;
     }
 
-    public void setDogId(Long id){
+    public void setDogId(Long id) {
         this.dogId = id;
     }
 
-    public String getName(){
+    public String getName() {
         return name;
     }
 
-    public void setName(String name){
+    public void setName(String name) {
         this.name = name;
     }
 
-    public String getDescription(){
+    public String getDescription() {
         return description;
     }
 
-    public void setDescription(String description){
+    public void setDescription(String description) {
         this.description = description;
     }
 
-    public String getBreed(){
+    public String getBreed() {
         return breed;
     }
 
-    public void setBreed(String breed){
+    public void setBreed(String breed) {
         this.breed = breed;
     }
 
-    public double getAge(){
+    public double getAge() {
         return age;
     }
 
-    public void setAge(double age){
+    public void setAge(double age) {
         this.age = age;
     }
 
-    public String getAnimalPicturePath(){
+    public String getAnimalPicturePath() {
         return animalPicturePath;
     }
 
-    public void setAnimalPicturePath(String animalPicturePath){
+    public void setAnimalPicturePath(String animalPicturePath) {
         this.animalPicturePath = animalPicturePath;
     }
 }
