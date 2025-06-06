@@ -43,9 +43,9 @@
         <input type="description" id="description" name="description" placeholder="Description"/>
         <input type="text" id="breed" name="breed" placeholder="Breed"/>
         <input type="number" id="age" name="age" step="0.01" placeholder="AGE"/>
-        <input type="file" id="picture" name="picture" required/>
-        <button type="submit" class="btn btn-primary">Save</button>
-       <a href="/animals" class="btn btn-outline-danger" >Cancel</a>
+        <input type="file" id="picture" name="picture" required/><br><br>
+        <button type="submit" class="btn btn-primary" style="background-color: rgb(240, 192, 255); color: black; border: none; padding: 8px 16px; border-radius: 5px; cursor: pointer;">Save</button>
+       <a href="/animals" class="btn" style ="color: black; border: rgb(240, 192, 255);">Cancel</a>
     </form>
 
 </div>

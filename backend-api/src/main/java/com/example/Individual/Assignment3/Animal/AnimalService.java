@@ -102,7 +102,7 @@ public class AnimalService {
       }catch(Exception e){
         e.printStackTrace();
       }
-    return animalRepository.save(animal);
+    return animalRepository.save(newAnimal);
    }
 
    /**

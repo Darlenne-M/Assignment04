@@ -50,8 +50,8 @@
        <label for="animalPicturePath" class="form-label">Current Picture</label>
       <input type="text" id="animalPicturePath" name="animalPicturePath" value="${(animal.animalPicturePath)}" readonly />
       <input type="file" id="picture" name="picture" />
-      <button type="submit" class="btn btn-primary">Save</button>
-      <a href="/animals" class="btn btn-outline-danger">Cancel</a>
+      <button type="submit" class="btn btn-primary" style="background-color: rgb(240, 192, 255); color: black; border: none; padding: 8px 16px; border-radius: 5px; cursor: pointer;">Save</button>
+      <a href="/animals" class="btn" style ="color: black; border: rgb(240, 192, 255);">Cancel</a>
     </form>
 
   </div>

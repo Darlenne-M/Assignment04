@@ -45,16 +45,18 @@
       <img src="/animalPictures/${(animal.animalPicturePath)!'avatar.png'}" class="card-img-top"
         style="height: 100px; width: 100px;" alt="animal picture">
       <div class="card-body">
-        <span style="float:right"> <a href="/animals/updateForm/${animal.dogId}" class="btn btn-primary">Edit
-            Animal</a></span>
+      
         <h5 class="card-title">ID: ${animal.dogId?c}</h5>
         <p class="card-text">Name: ${animal.name}</p>
         <p class="card-text">Description: ${animal.description}</p>
         <p class="card-text">Breed: ${animal.breed}</p>
         <p class="card-text">Age: ${animal.age}</p>
-        <a href="/animals/delete/${animal.dogId?c}" class="btn btn-danger">Delete
-          Animal</a>
-        <a href="/animals" class="btn btn-primary">Go back</a>
+        <span style="float:right"> <a href="/animals/delete/${animal.dogId?c}" class="btn btn-danger">Delete
+          Animal</a></span>
+        <a href="/animals/updateForm/${animal.dogId}" class="btn btn-primary" style="background-color: rgb(240, 192, 255); color: black; border: none; padding: 8px 16px; border-radius: 5px; cursor: pointer;">Edit
+            Animal</a>
+    
+        <a href="/animals" class="btn btn-primary" style="background-color: rgb(240, 192, 255); color: black; border: none; padding: 8px 16px; border-radius: 5px; cursor: pointer;">Go back</a>
       </div>
     </div>
 

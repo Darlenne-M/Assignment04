@@ -57,8 +57,7 @@
                                     <strong>ID:</strong> <a href="/animals/${animal.dogId?c}"
                                         style="color:#000000">${animal.dogId?c}</a><br>
                                     <strong>Name:</strong> ${animal.name}<br>
-                                    <strong>Description:</strong> <a href="/animals/description/${animal.description}"
-                                        style="color:#000000">${animal.description}</a>
+                                    <strong>Breed:</strong><a href="/animals/breed/${animal.breed}" style="color:#000000">${animal.breed}</a><br>
                                 </p>
                             </div>
                         </div>
